@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { CompaniesService } from '../services/companies.service';
+import { CompaniesService } from './companies.service';
 
 @Controller('companies')
 export class CompaniesController {
@@ -11,6 +11,6 @@ export class CompaniesController {
         @Query('dataPoint') dataPoint: string,
         @Query('tableName') tableName: string,
     ): Promise<string> {
-        return this.companiesService.getData(ticker, dataPoint, tableName);
+        return this.companiesService.getCompanyData(ticker, dataPoint, tableName);
     }
 }

@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { CompaniesService } from './services/companies.service';
+import { CompaniesService } from './companies/companies.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {CompaniesController} from "./controllers/companies.controller";
+import {CompaniesController} from "./companies/companies.controller";
 import {TableA} from "./entities/table-a.entity";
 import {TableB} from "./entities/table-b.entity";
 import {TableC} from "./entities/table-c.entity";
+import {CompaniesModule} from "./companies/companies.module";
 
 @Module({
   imports: [
@@ -19,8 +20,7 @@ import {TableC} from "./entities/table-c.entity";
       synchronize: true,
     }),
     TypeOrmModule.forFeature([TableA, TableB, TableC]),
+      CompaniesModule
   ],
-  controllers: [CompaniesController],
-  providers: [CompaniesService],
 })
 export class AppModule {}
