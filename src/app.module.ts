@@ -1,26 +1,18 @@
 import { Module } from '@nestjs/common';
-import { CompaniesService } from './companies/companies.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {CompaniesController} from "./companies/companies.controller";
-import {TableA} from "./entities/table-a.entity";
-import {TableB} from "./entities/table-b.entity";
-import {TableC} from "./entities/table-c.entity";
 import {CompaniesModule} from "./companies/companies.module";
+import {AppDataSource} from "./data-source";
+import {ConfigModule} from "@nestjs/config";
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'covalis_admin',
-      password: 'password',
-      database: 'covalis_db',
-      autoLoadEntities: true,
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
     }),
-    TypeOrmModule.forFeature([TableA, TableB, TableC]),
-      CompaniesModule
+    TypeOrmModule.forRoot(AppDataSource.options),
+    CompaniesModule
   ],
 })
+
 export class AppModule {}
