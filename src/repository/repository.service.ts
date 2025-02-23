@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { EntityManager } from 'typeorm';
 import { RulesService } from "../rules/rules.service";
 
@@ -9,7 +9,7 @@ export class RepositoryService {
         private readonly entityManager: EntityManager,
     ) {}
 
-    async getDataFromTable(ticker: string, dataPoint: string, tableName: string): Promise<any> {
+    async getCompanyDataFromTable(ticker: string, dataPoint: string, tableName: string): Promise<any> {
         const entity = await this.rulesService.getEntityForTable(tableName);
 
         const repository = this.entityManager.getRepository(entity);

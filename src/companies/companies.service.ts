@@ -9,7 +9,7 @@ export class CompaniesService {
 
     async getCompanyData(ticker: string, dataPoint: string, tableName: string): Promise<any> {
         try {
-            return await this.repositoryService.getDataFromTable(ticker, dataPoint, tableName);
+            return await this.repositoryService.getCompanyDataFromTable(ticker, dataPoint, tableName);
         } catch (error) {
             if (error instanceof NotFoundException) {
                 throw new NotFoundException(error.message);
