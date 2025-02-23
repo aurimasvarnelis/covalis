@@ -1,8 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { RepositoryService } from './repository.service';
-import { RulesService } from '../rules/rules.service';
-import { EntityManager } from 'typeorm';
-import { NotFoundException } from '@nestjs/common';
+import {Test, TestingModule} from '@nestjs/testing';
+import {RepositoryService} from './repository.service';
+import {RulesService} from '../rules/rules.service';
+import {EntityManager} from 'typeorm';
+import {NotFoundException} from '@nestjs/common';
 
 const mockRulesService = {
     getEntityForTable: jest.fn(),
@@ -21,8 +21,8 @@ describe('RepositoryService', () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 RepositoryService,
-                { provide: RulesService, useValue: mockRulesService },
-                { provide: EntityManager, useValue: mockEntityManager },
+                {provide: RulesService, useValue: mockRulesService},
+                {provide: EntityManager, useValue: mockEntityManager},
             ],
         }).compile();
 
@@ -42,22 +42,22 @@ describe('RepositoryService', () => {
         const tableEntity = 'Stock';
 
         it('should return the requested data point from the company record', async () => {
-            const mockEntity = { ticker: ticker, price: 150 };
-            const mockRepository = { findOne: jest.fn().mockResolvedValue(mockEntity) };
+            const mockEntity = {ticker: ticker, price: 150};
+            const mockRepository = {findOne: jest.fn().mockResolvedValue(mockEntity)};
 
             mockRulesService.getEntityForTable.mockResolvedValue(tableEntity);
             mockEntityManager.getRepository.mockReturnValue(mockRepository);
 
             const result = await service.getCompanyDataFromTable(ticker, dataPoint, tableName);
 
-            expect(result).toEqual({ price: 150 });
+            expect(result).toEqual({price: 150});
             expect(mockRulesService.getEntityForTable).toHaveBeenCalledWith(tableName);
             expect(mockEntityManager.getRepository).toHaveBeenCalledWith(tableEntity);
-            expect(mockRepository.findOne).toHaveBeenCalledWith({ where: { ticker } });
+            expect(mockRepository.findOne).toHaveBeenCalledWith({where: {ticker}});
         });
 
         it('should throw a NotFoundException if the record is not found', async () => {
-            const mockRepository = { findOne: jest.fn().mockResolvedValue(null) };
+            const mockRepository = {findOne: jest.fn().mockResolvedValue(null)};
 
             mockRulesService.getEntityForTable.mockResolvedValue(tableEntity);
             mockEntityManager.getRepository.mockReturnValue(mockRepository);

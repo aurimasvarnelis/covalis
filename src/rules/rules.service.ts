@@ -13,6 +13,16 @@ export class RulesService {
         this.setupRules();
     }
 
+    async getEntityForTable(tableName: string): Promise<any> {
+        const {events} = await this.engine.run({tableName});
+
+        if (!events.length || !events[0].params?.entity) {
+            throw new NotFoundException(`Entity not found for table: ${tableName}`);
+        }
+
+        return events[0].params.entity;
+    }
+
     private setupRules() {
         const entities = [
             {table: 'stock_data', entity: StockData},
@@ -31,15 +41,5 @@ export class RulesService {
                 },
             });
         });
-    }
-
-    async getEntityForTable(tableName: string): Promise<any> {
-        const {events} = await this.engine.run({tableName});
-
-        if (!events.length || !events[0].params?.entity) {
-            throw new NotFoundException(`Entity not found for table: ${tableName}`);
-        }
-
-        return events[0].params.entity;
     }
 }

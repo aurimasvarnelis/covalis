@@ -1,9 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { RulesService } from './rules.service';
-import { NotFoundException } from '@nestjs/common';
-import { StockData } from '../entities/stock-data.entity';
-import { PriceData } from '../entities/price-data.entity';
-import { VolumeData } from '../entities/volume-data.entity';
+import {Test, TestingModule} from '@nestjs/testing';
+import {RulesService} from './rules.service';
+import {NotFoundException} from '@nestjs/common';
+import {StockData} from '../entities/stock-data.entity';
+import {PriceData} from '../entities/price-data.entity';
+import {VolumeData} from '../entities/volume-data.entity';
 
 describe('RulesService', () => {
     let service: RulesService;

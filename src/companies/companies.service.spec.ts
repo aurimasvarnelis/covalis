@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CompaniesService } from './companies.service';
-import { RepositoryService } from '../repository/repository.service';
-import { NotFoundException, BadRequestException, InternalServerErrorException } from '@nestjs/common';
+import {Test, TestingModule} from '@nestjs/testing';
+import {CompaniesService} from './companies.service';
+import {RepositoryService} from '../repository/repository.service';
+import {BadRequestException, InternalServerErrorException, NotFoundException} from '@nestjs/common';
 
 const mockRepositoryService = {
     getCompanyDataFromTable: jest.fn(),
@@ -34,7 +34,7 @@ describe('CompaniesService', () => {
         const tableName = 'stocks';
 
         it('should return company data from repository service', async () => {
-            const expectedData = { ticker: ticker, price: 150 };
+            const expectedData = {ticker: ticker, price: 150};
 
             mockRepositoryService.getCompanyDataFromTable.mockResolvedValue(expectedData);
 

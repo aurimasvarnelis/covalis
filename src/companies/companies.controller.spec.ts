@@ -1,8 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CompaniesController } from './companies.controller';
-import { CompaniesService } from './companies.service';
-import { CacheInterceptor } from '@nestjs/cache-manager';
-import { GetDataDto } from './dto/get-data.dto';
+import {Test, TestingModule} from '@nestjs/testing';
+import {CompaniesController} from './companies.controller';
+import {CompaniesService} from './companies.service';
+import {CacheInterceptor} from '@nestjs/cache-manager';
+import {GetDataDto} from './dto/get-data.dto';
 
 describe('CompaniesController', () => {
     let controller: CompaniesController;
@@ -21,7 +21,7 @@ describe('CompaniesController', () => {
             ],
         })
             .overrideInterceptor(CacheInterceptor)
-            .useValue({}) // Optional: If you want to mock or bypass the CacheInterceptor
+            .useValue({})
             .compile();
 
         controller = module.get<CompaniesController>(CompaniesController);
