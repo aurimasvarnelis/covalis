@@ -9,7 +9,7 @@ export class CompaniesService {
         private readonly rulesService: RulesService,
     ) {}
 
-    async getCompanyData(tableName: string, ticker: string, dataPoint: string): Promise<any> {
+    async getCompanyData(ticker: string, dataPoint: string, tableName: string): Promise<any> {
         const matchedTableName = await this.rulesService.evaluateTable(tableName);
 
         return this.repositoryService.getDataFromTable(matchedTableName, ticker, dataPoint);
