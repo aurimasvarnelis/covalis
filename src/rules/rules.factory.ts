@@ -1,4 +1,4 @@
-import { Engine } from 'json-rules-engine';
+import {Engine} from 'json-rules-engine';
 
 export function createRulesEngine(): Engine {
     const engine = new Engine();
@@ -8,11 +8,11 @@ export function createRulesEngine(): Engine {
     tables.forEach((tableName) => {
         engine.addRule({
             conditions: {
-                all: [{ fact: 'tableName', operator: 'equal', value: tableName }],
+                all: [{fact: 'tableName', operator: 'equal', value: tableName}],
             },
             event: {
                 type: 'repository',
-                params: { tableName },
+                params: {tableName},
             },
         });
     });

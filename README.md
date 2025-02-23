@@ -1,6 +1,7 @@
 # covalis
 
 Create a NestJS RestAPI method that accepts 3 parameters:
+
 * Company ticker name
 * Data point name
 * Table name
@@ -16,6 +17,7 @@ The decision from which table to query data from should be made in any selected 
 engine or BPMN engine – ‘if’, ‘switch’ statements should be avoided.
 
 Bonus points:
+
 * Unit tests
 * Dockerfiles
 * Caching implementation

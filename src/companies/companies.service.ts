@@ -1,11 +1,12 @@
 import {BadRequestException, Injectable, InternalServerErrorException, NotFoundException} from '@nestjs/common';
-import { RepositoryService } from '../repository/repository.service';
+import {RepositoryService} from '../repository/repository.service';
 
 @Injectable()
 export class CompaniesService {
     constructor(
         private readonly repositoryService: RepositoryService,
-    ) {}
+    ) {
+    }
 
     async getCompanyData(ticker: string, dataPoint: string, tableName: string): Promise<any> {
         try {

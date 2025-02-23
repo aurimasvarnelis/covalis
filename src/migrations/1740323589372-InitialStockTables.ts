@@ -6,10 +6,10 @@ export class InitialStockTables1640254000000 implements MigrationInterface {
             new Table({
                 name: 'price_data',
                 columns: [
-                    { name: 'id', type: 'int', isPrimary: true, isGenerated: true, generationStrategy: 'increment' },
-                    { name: 'ticker', type: 'varchar', length: '10' },
-                    { name: 'price', type: 'decimal', precision: 10, scale: 2 },
-                    { name: 'date', type: 'date' },
+                    {name: 'id', type: 'int', isPrimary: true, isGenerated: true, generationStrategy: 'increment'},
+                    {name: 'ticker', type: 'varchar', length: '10'},
+                    {name: 'price', type: 'decimal', precision: 10, scale: 2},
+                    {name: 'date', type: 'date'},
                 ],
             }),
         );
@@ -18,13 +18,13 @@ export class InitialStockTables1640254000000 implements MigrationInterface {
             new Table({
                 name: 'stock_data',
                 columns: [
-                    { name: 'id', type: 'int', isPrimary: true, isGenerated: true, generationStrategy: 'increment' },
-                    { name: 'ticker', type: 'varchar', length: '10' },
-                    { name: 'open', type: 'decimal', precision: 10, scale: 2 },
-                    { name: 'close', type: 'decimal', precision: 10, scale: 2 },
-                    { name: 'high', type: 'decimal', precision: 10, scale: 2 },
-                    { name: 'low', type: 'decimal', precision: 10, scale: 2 },
-                    { name: 'date', type: 'date' },
+                    {name: 'id', type: 'int', isPrimary: true, isGenerated: true, generationStrategy: 'increment'},
+                    {name: 'ticker', type: 'varchar', length: '10'},
+                    {name: 'open', type: 'decimal', precision: 10, scale: 2},
+                    {name: 'close', type: 'decimal', precision: 10, scale: 2},
+                    {name: 'high', type: 'decimal', precision: 10, scale: 2},
+                    {name: 'low', type: 'decimal', precision: 10, scale: 2},
+                    {name: 'date', type: 'date'},
                 ],
             }),
         );
@@ -33,10 +33,10 @@ export class InitialStockTables1640254000000 implements MigrationInterface {
             new Table({
                 name: 'volume_data',
                 columns: [
-                    { name: 'id', type: 'int', isPrimary: true, isGenerated: true, generationStrategy: 'increment' },
-                    { name: 'ticker', type: 'varchar', length: '10' },
-                    { name: 'volume', type: 'bigint' },
-                    { name: 'date', type: 'date' },
+                    {name: 'id', type: 'int', isPrimary: true, isGenerated: true, generationStrategy: 'increment'},
+                    {name: 'ticker', type: 'varchar', length: '10'},
+                    {name: 'volume', type: 'bigint'},
+                    {name: 'date', type: 'date'},
                 ],
             }),
         );

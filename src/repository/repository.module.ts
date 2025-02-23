@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { RepositoryService } from './repository.service';
-import { RulesModule } from '../rules/rules.module';
+import {Module} from '@nestjs/common';
+import {RepositoryService} from './repository.service';
+import {RulesModule} from '../rules/rules.module';
 
 @Module({
     imports: [RulesModule],
@@ -8,4 +8,5 @@ import { RulesModule } from '../rules/rules.module';
     exports: [RepositoryService],
 })
 
-export class RepositoryModule {}
+export class RepositoryModule {
+}

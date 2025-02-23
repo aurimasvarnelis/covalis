@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { DataSource } from 'typeorm';
+import {DataSource} from 'typeorm';
 import {PriceData} from "./entities/price-data.entity";
 import {StockData} from "./entities/stock-data.entity";
 import {VolumeData} from "./entities/volume-data.entity";
