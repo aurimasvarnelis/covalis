@@ -1,8 +1,10 @@
-import {Controller, Get, Query, UsePipes, ValidationPipe} from '@nestjs/common';
+import {Controller, Get, Query, UseInterceptors, UsePipes, ValidationPipe} from '@nestjs/common';
 import {CompaniesService} from './companies.service';
 import {GetDataDto} from './dto/get-data.dto';
+import {CacheInterceptor} from "@nestjs/cache-manager";
 
 @Controller('companies')
+@UseInterceptors(CacheInterceptor)
 export class CompaniesController {
     constructor(private readonly companiesService: CompaniesService) {
     }
