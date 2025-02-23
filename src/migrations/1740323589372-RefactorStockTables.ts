@@ -2,6 +2,10 @@ import {MigrationInterface, QueryRunner, Table} from 'typeorm';
 
 export class RefactorStockTables1640254000000 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable('table-a');
+        await queryRunner.dropTable('table-b');
+        await queryRunner.dropTable('table-c');
+
         await queryRunner.createTable(
             new Table({
                 name: 'price_data',

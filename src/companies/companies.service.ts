@@ -1,17 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import {BadRequestException, Injectable, InternalServerErrorException, NotFoundException} from '@nestjs/common';
 import { RepositoryService } from '../repository/repository.service';
-import { RulesService } from '../rules/rules.service';
 
 @Injectable()
 export class CompaniesService {
     constructor(
         private readonly repositoryService: RepositoryService,
-        private readonly rulesService: RulesService,
     ) {}
 
     async getCompanyData(ticker: string, dataPoint: string, tableName: string): Promise<any> {
-        const matchedTableName = await this.rulesService.evaluateTable(tableName);
-
-        return this.repositoryService.getDataFromTable(matchedTableName, ticker, dataPoint);
+        try {
+            return await this.repositoryService.getDataFromTable(ticker, dataPoint, tableName);
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                throw new NotFoundException(error.message);
+            } else if (error instanceof BadRequestException) {
+                throw new BadRequestException(error.message);
+            } else {
+                throw new InternalServerErrorException();
+            }
+        }
     }
 }

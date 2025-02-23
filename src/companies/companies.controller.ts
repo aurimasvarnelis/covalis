@@ -1,16 +1,17 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
+import { GetDataDto } from './dto/get-data.dto';
 
 @Controller('companies')
 export class CompaniesController {
     constructor(private readonly companiesService: CompaniesService) {}
 
     @Get()
+    @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
     async getData(
-        @Query('ticker') ticker: string,
-        @Query('dataPoint') dataPoint: string,
-        @Query('tableName') tableName: string,
+        @Query() query: GetDataDto,
     ): Promise<string> {
+        const { ticker, dataPoint, tableName } = query;
         return this.companiesService.getCompanyData(ticker, dataPoint, tableName);
     }
 }

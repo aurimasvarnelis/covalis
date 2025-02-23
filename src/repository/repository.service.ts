@@ -1,33 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { EntityManager, Repository, ObjectLiteral } from 'typeorm';
-import { RulesService } from '../rules/rules.service';
+import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { EntityManager } from 'typeorm';
+import { RulesService } from "../rules/rules.service";
 
 @Injectable()
 export class RepositoryService {
     constructor(
-        private readonly entityManager: EntityManager,
         private readonly rulesService: RulesService,
+        private readonly entityManager: EntityManager,
     ) {}
 
-    async getDataFromTable(tableName: string, ticker: string, dataPoint: string): Promise<any> {
-        const matchedTableName = await this.rulesService.evaluateTable(tableName);
+    async getDataFromTable(ticker: string, dataPoint: string, tableName: string): Promise<any> {
+        const entity = await this.rulesService.getEntityForTable(tableName);
 
-        const repo = this.getRepositoryByName(matchedTableName);
+        const repository = this.entityManager.getRepository(entity);
 
-        const record = await repo.findOne({ where: { ticker } as any });
+        let record = await repository.findOne({ where: { ticker } as any });
 
         if (!record) {
-            throw new Error(`Record not found in table: ${matchedTableName}`);
+            throw new NotFoundException(`Record not found in table: ${tableName} for ticker: ${ticker}`);
         }
 
         return { [dataPoint]: record[dataPoint] };
-    }
-
-    private getRepositoryByName<T extends ObjectLiteral>(tableName: string): Repository<T> {
-        try {
-            return this.entityManager.getRepository(tableName) as Repository<T>;
-        } catch (error) {
-            throw new Error(`Repository not found for table: ${tableName}`);
-        }
     }
 }
